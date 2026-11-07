@@ -5,7 +5,7 @@ function Projects({ text, language }) {
   const [schoolSystem, ...otherProjects] = projects
 
   return (
-    <section aria-labelledby="projects-heading" className="px-5 py-14 sm:px-6 sm:py-20">
+    <section aria-labelledby="projects-heading" className="px-5 py-14 sm:px-6 sm:py-20 mb-14">
       <div className="mx-auto max-w-6xl">
         <div id="projects" className="mb-8 max-w-[66ch] sm:mb-10">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm">{text.projects}</p>

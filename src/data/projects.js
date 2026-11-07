@@ -3,7 +3,7 @@ export const projects = [
     id: 'school-system',
     featured: true,
     technologies: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'React'],
-    demo: 'https://school-system-demo.biloliddin500dbmin.workers.dev/',
+    demo: 'https://school-demo.tbiloliddin.uz/',
     text: {
       en: {
         title: 'School Management System',

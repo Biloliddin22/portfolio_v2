@@ -14,8 +14,8 @@ function Footer({ text }) {
   return (
     <footer className="border-t border-border bg-surface px-5 sm:px-6">
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-7 py-9 sm:grid-cols-[1.4fr_0.8fr_1fr] sm:gap-8 sm:py-12">
-          <div className="col-span-2 sm:col-span-1">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-5 py-6 sm:grid-cols-[1.4fr_0.8fr_1fr] sm:gap-8 sm:py-12">
+          <div className="col-span-2 border-b border-border pb-4 sm:col-span-1 sm:border-b-0 sm:pb-0">
             <a href="#home" className="rounded-sm text-lg font-bold tracking-tight transition hover:text-accent">
               {text.name}
             </a>
@@ -43,7 +43,7 @@ function Footer({ text }) {
             </ul>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-border py-5 text-sm text-secondary">
+        <div className="flex flex-col items-center gap-2 border-t border-border py-4 text-center text-xs text-secondary sm:flex-row sm:justify-between sm:gap-x-6 sm:py-5 sm:text-left sm:text-sm">
           <p>© {year} {text.name}</p>
           <p className="flex flex-wrap items-center gap-1.5">
             <span>{prefix}</span>
