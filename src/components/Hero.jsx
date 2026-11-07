@@ -1,15 +1,17 @@
-import me from '../assets/images/me.png'
+import me from '../assets/images/me.webp'
 import { githubUrl, telegramUrl } from '../data/links'
 
 const socialLinkClass = 'nav-lift rounded-xl border border-border bg-surface px-5 py-3 text-sm font-semibold'
 
 function Hero({ text }) {
   return (
-    <section id="home" className="px-5 py-16 sm:px-6 sm:py-24 lg:py-28">
-      <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+    <section id="home" className="hero-screen px-5 sm:px-6">
+      <div className="hero-entrance mx-auto flex max-w-4xl flex-col items-center text-center">
         <img
           src={me}
           alt={text.name}
+          fetchPriority="high"
+          decoding="async"
           className="mb-6 size-32 rounded-full border-4 border-surface object-cover shadow-lg sm:mb-8 sm:size-40"
         />
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm">

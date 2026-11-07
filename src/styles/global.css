@@ -11,6 +11,7 @@
 }
 
 :root {
+  --header-height: 57px;
   font-family: Inter, system-ui, sans-serif;
   color-scheme: light;
   text-rendering: optimizeLegibility;
@@ -19,12 +20,21 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
+  scroll-padding-top: calc(var(--header-height) + 0.5rem);
 }
 
 body {
   background: var(--color-background);
   color: var(--color-primary);
+}
+
+.hero-screen {
+  display: grid;
+  align-items: center;
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+  padding-block: clamp(1.25rem, 4vh, 5rem);
+  padding-block: clamp(1.25rem, 4svh, 5rem);
 }
 
 a:focus-visible,
@@ -45,6 +55,60 @@ button:focus-visible {
 
 .card-lift {
   transition: translate 240ms ease, box-shadow 240ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main {
+    overflow-x: clip;
+  }
+
+  .hero-entrance > * {
+    animation: portfolio-entrance 600ms cubic-bezier(0.22, 0.72, 0.26, 1) backwards;
+  }
+
+  .hero-entrance > :first-child { --entry-scale: 0.88; }
+  .hero-entrance > :nth-child(2) { animation-delay: 80ms; }
+  .hero-entrance > :nth-child(3) { animation-delay: 160ms; }
+  .hero-entrance > :nth-child(4) { animation-delay: 240ms; }
+  .hero-entrance > :nth-child(5) { animation-delay: 320ms; }
+
+  [data-reveal-ready] [data-reveal]:not([data-revealed]):not(:focus-within) {
+    opacity: 0;
+  }
+
+  [data-reveal] {
+    --entry-y: clamp(36px, 6vh, 60px);
+  }
+
+  [data-reveal="left"] {
+    --entry-x: clamp(-68px, -8vw, -28px);
+    --entry-y: 0px;
+  }
+
+  [data-reveal="right"] {
+    --entry-x: clamp(28px, 8vw, 68px);
+    --entry-y: 0px;
+  }
+
+  [data-reveal="zoom"] {
+    --entry-scale: 0.91;
+  }
+
+  [data-revealed] {
+    animation: portfolio-entrance 900ms cubic-bezier(0.22, 0.72, 0.26, 1) 500ms backwards;
+  }
+
+  .hero-entrance > :focus-within,
+  [data-revealed]:focus-within {
+    animation: none;
+  }
+
+  @keyframes portfolio-entrance {
+    from {
+      opacity: 0;
+      transform: translate(var(--entry-x, 0px), var(--entry-y, 22px)) scale(var(--entry-scale, 1));
+    }
+  }
 }
 
 .creator-heart {
@@ -143,7 +207,8 @@ button:focus-visible {
 
 @media (min-width: 640px) {
   html {
-    scroll-padding-top: 5rem;
+    --header-height: 67px;
+    scroll-padding-top: calc(var(--header-height) + 0.75rem);
   }
 }
 

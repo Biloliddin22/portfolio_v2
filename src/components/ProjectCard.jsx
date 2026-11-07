@@ -11,6 +11,7 @@ function ProjectCard({ project, text, language }) {
 
   return (
     <article
+      data-reveal="zoom"
       className={`card-lift grid overflow-hidden rounded-3xl border border-border bg-surface ${project.featured ? 'lg:grid-cols-[1.25fr_1fr]' : 'md:row-span-2 md:grid-rows-subgrid'}`}
     >
       {project.featured && (

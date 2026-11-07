@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -20,6 +20,29 @@ function App() {
     document.title = text.title
     localStorage.setItem(languageKey, language)
   }, [language, text.title])
+
+  useLayoutEffect(() => {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
+    const root = document.getElementById('root')
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.dataset.revealed = ''
+          observer.unobserve(entry.target)
+        }
+      }
+    }, { rootMargin: '0px 0px 16px 0px' })
+
+    root.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
+    root.dataset.revealReady = ''
+    return () => {
+      observer.disconnect()
+      delete root.dataset.revealReady
+    }
+  }, [])
 
   return (
     <>

@@ -1,19 +1,41 @@
+import { useLayoutEffect, useRef } from 'react'
 import { languages } from '../data/copy'
 
 const navLinkClass =
-  'nav-lift inline-flex min-h-10 items-center whitespace-nowrap rounded-lg px-1.5 text-xs sm:px-2.5 sm:text-sm'
+  'nav-lift inline-flex min-h-10 items-center whitespace-nowrap rounded-lg px-1.5 text-sm font-medium min-[360px]:text-[0.9375rem] sm:px-2.5'
 
 function Header({ text, language, setLanguage }) {
+  const headerRef = useRef(null)
+
+  useLayoutEffect(() => {
+    if (!('ResizeObserver' in window)) return
+
+    const header = headerRef.current
+    const pageStyle = document.documentElement.style
+    const updateHeaderHeight = () => {
+      pageStyle.setProperty('--header-height', `${header.getBoundingClientRect().height}px`)
+    }
+
+    updateHeaderHeight()
+    const observer = new ResizeObserver(updateHeaderHeight)
+    observer.observe(header, { box: 'border-box' })
+
+    return () => {
+      observer.disconnect()
+      pageStyle.removeProperty('--header-height')
+    }
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-1.5 px-3 py-2 sm:gap-3 sm:px-6 sm:py-3">
+    <header ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-1 px-2.5 py-2 min-[360px]:gap-1.5 min-[360px]:px-3 sm:gap-3 sm:px-6 sm:py-3">
         <a
           href="#home"
           aria-label={text.home}
-          className="nav-lift inline-flex size-10 shrink-0 items-center justify-center gap-2 rounded-lg sm:w-auto sm:px-2"
+          className="nav-lift inline-flex size-9 shrink-0 items-center justify-center gap-2 rounded-lg min-[360px]:size-10 sm:w-auto sm:px-2"
         >
           <img
-            src="/IconPortfolio.ico"
+            src="/portfolio-icon.png"
             alt=""
             width={28}
             height={28}
@@ -42,7 +64,7 @@ function Header({ text, language, setLanguage }) {
               aria-label={label}
               aria-pressed={language === code}
               onClick={() => setLanguage(code)}
-              className="nav-lift grid size-8 cursor-pointer place-items-center rounded-full text-xs font-semibold uppercase"
+              className="nav-lift grid size-7 cursor-pointer place-items-center rounded-full text-xs font-semibold uppercase min-[360px]:size-8"
             >
               {code}
             </button>

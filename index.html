@@ -2,12 +2,87 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/IconPortfolio.ico" />
+    <link rel="icon" type="image/png" href="/portfolio-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Biloliddin Tuychiboev | Portfolio</title>
+    <style>
+      #startup {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        gap: 1rem;
+        visibility: hidden;
+        background: #f8fafc;
+        color: #475569;
+        text-align: center;
+        font: 500 0.875rem system-ui, sans-serif;
+        animation: startup-appear 180ms ease-out 180ms forwards;
+      }
+
+      .startup-mark {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 4rem;
+        height: 4rem;
+        margin-inline: auto;
+        border-radius: 50%;
+        background: #0f172a;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.06em;
+      }
+
+      .startup-mark::after {
+        position: absolute;
+        inset: -5px;
+        border: 2px solid #dbeafe;
+        border-top-color: #2563eb;
+        border-right-color: #2563eb;
+        border-radius: inherit;
+        content: "";
+        animation: startup-orbit 900ms linear infinite;
+      }
+
+      #startup[data-failed] .startup-mark::after {
+        animation: none;
+      }
+
+      @keyframes startup-appear {
+        from { visibility: visible; opacity: 0; }
+        to { visibility: visible; opacity: 1; }
+      }
+
+      @keyframes startup-orbit {
+        to { transform: rotate(1turn); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #startup { animation-duration: 0s; }
+        .startup-mark::after { animation: none; }
+      }
+    </style>
+    <script>
+      window.addEventListener('error', (event) => {
+        if (!(event.target instanceof HTMLScriptElement) || event.target.type !== 'module') return
+        const startup = document.getElementById('startup')
+        const message = document.getElementById('startup-message')
+        startup?.setAttribute('data-failed', '')
+        if (message) message.textContent = 'Could not load the portfolio. Please reload the page.'
+      }, true)
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="startup" role="status">
+        <span class="startup-mark" aria-hidden="true">BT</span>
+        <span id="startup-message">Loading portfolio…</span>
+      </div>
+      <noscript>Please enable JavaScript to view this portfolio.</noscript>
+    </div>
+    <noscript><style>#startup { display: none; }</style></noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
