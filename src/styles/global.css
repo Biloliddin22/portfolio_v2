@@ -3,31 +3,162 @@
 @theme {
   --color-background: #f8fafc;
   --color-surface: #ffffff;
-
   --color-primary: #0f172a;
   --color-secondary: #475569;
-
   --color-accent: #2563eb;
   --color-accent-light: #eff6ff;
-
   --color-border: #e2e8f0;
 }
 
 :root {
   font-family: Inter, system-ui, sans-serif;
+  color-scheme: light;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6.75rem;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
   background: var(--color-background);
   color: var(--color-primary);
 }
 
-* {
-  box-sizing: border-box;
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.nav-lift {
+  color: var(--color-secondary);
+  transition: translate 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.nav-lift[aria-pressed="true"] {
+  background: var(--color-accent);
+  color: white;
+}
+
+.card-lift {
+  transition: translate 240ms ease, box-shadow 240ms ease;
+}
+
+.creator-heart {
+  display: inline-block;
+  color: #e91c37;
+  line-height: 1;
+  animation: creator-heartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes creator-heartbeat {
+  0%, 24%, 48%, 100% { scale: 1; }
+  12% { scale: 1.22; }
+  36% { scale: 1.16; }
+}
+
+@media (hover: hover) {
+  .nav-lift:hover {
+    translate: 0 -2px;
+    box-shadow: 0 4px 12px rgb(15 23 42 / 12%);
+  }
+
+  .nav-lift:not([aria-pressed="true"]):hover {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  .card-lift:hover {
+    translate: 0 -4px;
+    box-shadow: 0 16px 32px rgb(15 23 42 / 10%);
+  }
+}
+
+.dashboard-preview {
+  container: dashboard / inline-size;
+}
+
+.preview-frame {
+  font-size: clamp(0.5625rem, 2.25cqw, 0.6875rem);
+  line-height: 1.35;
+}
+
+.preview-summary {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.preview-lesson-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.preview-sidebar {
+  display: none;
+}
+
+.preview-chevron {
+  width: 0.35rem;
+  height: 0.35rem;
+  flex-shrink: 0;
+  border: solid currentColor;
+  border-width: 0 1px 1px 0;
+  rotate: 45deg;
+}
+
+@container dashboard (min-width: 440px) {
+  .preview-frame {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(84px, 22%);
+  }
+
+  .preview-sidebar {
+    display: block;
+  }
+
+  .preview-mobile-brand {
+    display: none;
+  }
+}
+
+@container dashboard (min-width: 500px) {
+  .preview-summary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  }
+
+  .preview-lessons {
+    border-right: 1px solid #e3e5f0;
+    padding-right: 0.5rem;
+  }
+
+  .preview-lesson-counts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creator-heart {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nav-lift,
+  .card-lift {
+    transition: none;
+    translate: none !important;
+  }
 }

@@ -1,252 +1,97 @@
-function SchoolSystemPreview() {
-  const moneyRows = [
-    {
-      label: 'Cash',
-      income: '3 540 000',
-      expenses: '420 000',
-      net: '3 120 000',
-    },
-    {
-      label: 'Card',
-      income: '2 180 000',
-      expenses: '300 000',
-      net: '1 880 000',
-    },
-    {
-      label: 'Total',
-      income: '5 720 000',
-      expenses: '720 000',
-      net: '5 000 000',
-      total: true,
-    },
-  ]
+const money = [
+  [120000, 25000, 95000],
+  [99000, 45000, 54000],
+  [219000, 70000, 149000],
+]
+const queueCounts = [0, 1, 1]
+const sidebarGroups = [1, 3, 4]
 
-  const todoItems = [
-    'Teacher message needs review',
-    'Attendance requires marking',
-    'Payment reminder due',
-  ]
+function SchoolSystemPreview({ text, language }) {
+  const number = new Intl.NumberFormat(language)
 
   return (
-    <div className="w-full rounded-2xl bg-[#F6F7FB] p-3 shadow-sm sm:p-4">
-      <div className="mb-4">
-        <h4 className="text-lg font-bold text-[#251B58]">
-          Dashboard
-        </h4>
+    <figure className="dashboard-preview w-full">
+      <div className="preview-frame overflow-hidden rounded-2xl border border-[#e3e5f0] bg-gray-50 text-[#251b58] shadow-sm">
+        <div className="preview-mobile-brand bg-[#251b58] px-3 py-2 font-bold text-white">Joseph School</div>
+        <div className="min-w-0 p-2.5 sm:p-3">
+          <div className="mb-2 flex justify-end">
+            <span className="rounded-md border border-[#e3e5f0] bg-white px-1.5 py-1">{text.about}</span>
+          </div>
+          <div className="mb-3">
+            <p className="text-base leading-tight font-bold sm:text-lg">{text.title}</p>
+            <p className="mt-1 text-[#6b6b8a]">{text.welcome}</p>
+          </div>
 
-        <p className="mt-1 text-xs text-[#6B6B8A]">
-          Welcome back to Joseph School
-        </p>
-      </div>
-
-      <div className="rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-        <div className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr]">
-          <section>
-            <h5 className="mb-3 text-sm font-bold text-[#251B58]">
-              Today's Lessons
-            </h5>
-
-            <div className="divide-y divide-[#E3E5F0]">
-              <div className="flex items-center justify-between py-3">
-                <span className="text-xs text-[#6B6B8A]">
-                  Total lessons
-                </span>
-
-                <span className="text-xl font-bold text-[#251B58]">
-                  18
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <span className="text-xs text-[#6B6B8A]">
-                  Awaiting mark
-                </span>
-
-                <span className="text-xl font-bold text-[#251B58]">
-                  3
-                </span>
-              </div>
+          <div className="preview-summary rounded-lg bg-white p-2.5 shadow-sm">
+            <div className="preview-lessons min-w-0">
+              <p className="mb-1.5 font-bold">{text.lessons}</p>
+              <dl className="preview-lesson-counts">
+                {text.counts.map((label) => (
+                  <div key={label} className="flex items-center justify-between gap-1 py-1.5">
+                    <dt className="text-[#6b6b8a]">{label}</dt>
+                    <dd className="text-sm leading-none font-bold tabular-nums">7</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-          </section>
 
-          <section className="lg:border-l lg:border-[#E3E5F0] lg:pl-5">
-            <h5 className="mb-3 text-sm font-bold text-[#251B58]">
-              Today's Money Movement
-            </h5>
-
-            <div className="overflow-hidden rounded-xl border border-[#E3E5F0]">
-              <table className="w-full text-[10px] sm:text-xs">
-                <thead>
-                  <tr className="border-b border-[#E3E5F0] text-left text-[#6B6B8A]">
-                    <th className="px-2 py-2 font-medium">
-                      Method
-                    </th>
-
-                    <th className="px-2 py-2 text-right font-medium">
-                      Income
-                    </th>
-
-                    <th className="px-2 py-2 text-right font-medium">
-                      Expenses
-                    </th>
-
-                    <th className="px-2 py-2 text-right font-medium">
-                      Net
-                    </th>
+            <div className="min-w-0">
+              <p className="mb-1.5 font-bold">{text.money}</p>
+              <table className="w-full border-collapse text-right tabular-nums">
+                <thead className="text-[#6b6b8a]">
+                  <tr className="border-b border-[#e3e5f0]">
+                    {text.columns.map((column) => (
+                      <th key={column} scope="col" className="px-0.5 pb-1 font-medium first:text-left">{column}</th>
+                    ))}
                   </tr>
                 </thead>
-
                 <tbody>
-                  {moneyRows.map((row) => (
-                    <tr
-                      key={row.label}
-                      className={`border-b border-[#E3E5F0] last:border-b-0 ${
-                        row.total ? 'bg-[#F2F2F7] font-bold' : ''
-                      }`}
-                    >
-                      <td className="px-2 py-2 text-[#251B58]">
-                        {row.label}
-                      </td>
-
-                      <td className="whitespace-nowrap px-2 py-2 text-right text-green-600">
-                        {row.income}
-                      </td>
-
-                      <td className="whitespace-nowrap px-2 py-2 text-right text-red-600">
-                        {row.expenses}
-                      </td>
-
-                      <td className="whitespace-nowrap px-2 py-2 text-right text-[#251B58]">
-                        {row.net}
-                      </td>
+                  {money.map((amounts, row) => (
+                    <tr key={text.methods[row]} className={row === 2 ? 'bg-gray-100 font-bold' : 'border-b border-[#e3e5f0]'}>
+                      <th scope="row" className="px-0.5 py-1 text-left font-semibold">{text.methods[row]}</th>
+                      {amounts.map((amount, column) => (
+                        <td key={column} className={`px-0.5 py-1 whitespace-nowrap ${['text-green-700', 'text-red-600', ''][column]}`}>
+                          {number.format(amount)}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </section>
-        </div>
-      </div>
-
-      <div className="mt-3 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl bg-white p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-          <div className="flex items-center justify-between">
-            <h5 className="text-xs font-bold text-[#251B58]">
-              To-do list
-            </h5>
-
-            <span className="rounded-full bg-[#E8F0FF] px-2 py-0.5 text-[10px] font-semibold text-[#251B58]">
-              3
-            </span>
           </div>
 
-          <div className="mt-3 space-y-2">
-            {todoItems.map((item) => (
-              <div
-                key={item}
-                className="rounded-lg border border-[#E3E5F0] px-2 py-2"
-              >
-                <p className="truncate text-[10px] text-[#6B6B8A]">
-                  {item}
-                </p>
+          <div className="mt-3 grid gap-2">
+            {text.lists.map((label, index) => (
+              <div key={label} className="flex items-center justify-between gap-2 rounded-lg bg-white px-2.5 py-2 font-bold shadow-sm">
+                <span>{label} ({queueCounts[index]})</span>
+                <span className="preview-chevron" aria-hidden="true" />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-          <div className="flex items-center justify-between">
-            <h5 className="text-xs font-bold text-[#251B58]">
-              Payment Reminders
-            </h5>
-
-            <span className="rounded-full bg-[#FFE5E8] px-2 py-0.5 text-[10px] font-semibold text-[#E91C37]">
-              4
-            </span>
-          </div>
-
-          <div className="mt-3 space-y-2">
-            <div className="flex items-center justify-between rounded-lg border border-[#E3E5F0] px-2 py-2">
-              <div>
-                <p className="text-[10px] font-medium text-[#251B58]">
-                  Grammar 1
-                </p>
-
-                <p className="text-[9px] text-[#6B6B8A]">
-                  2 lessons left
-                </p>
-              </div>
-
-              <span className="text-[10px] font-semibold text-red-600">
-                390 000
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between rounded-lg border border-[#E3E5F0] px-2 py-2">
-              <div>
-                <p className="text-[10px] font-medium text-[#251B58]">
-                  IELTS
-                </p>
-
-                <p className="text-[9px] text-[#6B6B8A]">
-                  1 lesson left
-                </p>
-              </div>
-
-              <span className="text-[10px] font-semibold text-red-600">
-                690 000
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-2xl bg-white p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-          <div className="flex items-center justify-between">
-            <h5 className="text-xs font-bold text-[#251B58]">
-              Student Follow-Ups
-            </h5>
-
-            <span className="rounded-full bg-[#FFF4DD] px-2 py-0.5 text-[10px] font-semibold text-yellow-700">
-              2
-            </span>
-          </div>
-
-          <div className="mt-3 space-y-2">
-            <div className="rounded-lg border border-[#E3E5F0] px-2 py-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-medium text-[#251B58]">
-                  Practice 2
-                </span>
-
-                <span className="text-[9px] font-semibold text-yellow-700">
-                  5 days
-                </span>
-              </div>
-
-              <p className="mt-1 text-[9px] text-[#6B6B8A]">
-                Needs follow-up
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#E3E5F0] px-2 py-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-medium text-[#251B58]">
-                  Multilevel
-                </span>
-
-                <span className="text-[9px] font-semibold text-yellow-700">
-                  7 days
-                </span>
-              </div>
-
-              <p className="mt-1 text-[9px] text-[#6B6B8A]">
-                Needs follow-up
-              </p>
-            </div>
+        <div className="preview-sidebar bg-[#251b58] p-2 text-white">
+          <p className="mb-3 text-[1.15em] leading-tight font-bold">Joseph School</p>
+          <ul className="grid gap-1">
+            {text.sidebar.map((label, index) => (
+              <li
+                key={label}
+                className={`flex items-center justify-between gap-1 rounded-md px-1.5 py-1 ${index === 0 ? 'bg-white font-semibold text-[#251b58]' : ''}`}
+              >
+                {label}
+                {sidebarGroups.includes(index) && <span className="preview-chevron" aria-hidden="true" />}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 border-t border-white/20 pt-2">
+            <p className="mb-1 text-white/80">{text.viewAs}</p>
+            <p className="rounded bg-white px-1.5 py-1 text-[#251b58]">{text.owner}</p>
           </div>
         </div>
       </div>
-    </div>
+      <figcaption className="mt-2 text-xs leading-snug text-secondary">{text.caption}</figcaption>
+    </figure>
   )
 }
 

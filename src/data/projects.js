@@ -1,56 +1,44 @@
 export const projects = [
   {
     id: 'school-system',
-    title: 'School Management System',
-    type: 'Featured Project',
-    description:
-      'A school management system built for a real language school and currently used to manage 170+ students.',
-    technologies: [
-      'Python',
-      'FastAPI',
-      'PostgreSQL',
-      'SQLAlchemy',
-      'React',
-    ],
-    highlights: [
-      '170+ real students',
-      'Student and group management',
-      'Attendance tracking',
-      'Payments and receipts',
-      'Schedules and course management',
-      'Designed around real school workflows',
-    ],
-    image: null,
-    github: null,
-    demo: null,
     featured: true,
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'React'],
+    demo: 'https://school-system-demo.biloliddin500dbmin.workers.dev/',
+    text: {
+      en: {
+        title: 'School Management System',
+        description: 'Built for Joseph School and used daily to manage records for 200+ students.',
+        highlights: ['Students, enrollments, and groups', 'Schedules and attendance', 'Payments and receipts', 'Payroll and financial reports'],
+      },
+      ru: {
+        title: 'Система управления учебным центром',
+        description: 'Создана для Joseph School. Центр ежедневно ведёт в ней учёт 200+ учеников.',
+        highlights: ['Ученики, зачисления и группы', 'Расписание и посещаемость', 'Оплаты и чеки', 'Зарплаты и финансовые отчёты'],
+      },
+      uz: {
+        title: 'O‘quv markazini boshqarish tizimi',
+        description: 'Joseph School uchun yaratilgan. Markaz tizimda 200 dan ortiq o‘quvchining ma’lumotlarini yuritadi.',
+        highlights: ['O‘quvchilar, qabul va guruhlar', 'Dars jadvali va davomat', 'To‘lovlar va cheklar', 'Ish haqi va moliyaviy hisobotlar'],
+      },
+    },
   },
-
   {
     id: 'ielts-reading',
-    title: 'IELTS Reading Platform',
-    type: 'Featured Project',
-    description:
-      'A computer-based IELTS Reading simulator with timed tests, highlighting, notes, answer navigation, results, and printing.',
     technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
-    highlights: [],
-    image: null,
-    github: null,
-    demo: null,
-    featured: true,
+    demo: 'https://ieltsreadingbt.netlify.app/',
+    text: {
+      en: { title: 'IELTS Reading Platform', description: 'A computer-based IELTS Reading simulator with timed tests, highlighting, notes, answer navigation, results, and printing.' },
+      ru: { title: 'Платформа IELTS Reading', description: 'Симулятор компьютерного IELTS Reading с таймером, выделением текста, заметками, навигацией по ответам и печатью результатов.' },
+      uz: { title: 'IELTS Reading platformasi', description: 'Taymer, matnni belgilash, izohlar, javoblar orasida o‘tish va natijalarni chop etish imkoniyatiga ega IELTS Reading simulyatori.' },
+    },
   },
-
   {
     id: 'tasbeh',
-    title: 'Tasbeh',
-    type: 'Featured Project',
-    description:
-      'A simple and focused digital tasbeh application, with plans for both web and Android versions.',
     technologies: ['HTML', 'CSS', 'JavaScript', 'PWA'],
-    highlights: [],
-    image: null,
-    github: null,
-    demo: null,
-    featured: true,
+    text: {
+      en: { title: 'Tasbeh', description: 'A digital tasbeh counter, with web and Android versions planned.' },
+      ru: { title: 'Тасбих', description: 'Цифровой счётчик для тасбиха. В планах версии для браузера и Android.' },
+      uz: { title: 'Tasbeh', description: 'Raqamli tasbeh hisoblagichi. Veb va Android versiyalari rejalashtirilgan.' },
+    },
   },
 ]

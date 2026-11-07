@@ -1,36 +1,36 @@
-function About() {
+import TechnologyTags from './TechnologyTags'
+
+function About({ text }) {
   return (
-    <section id="about" className="bg-surface px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start">
-          <div>
-            <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-accent">
-              About
-            </p>
-
-            <h2 className="text-3xl font-bold tracking-tight text-primary md:text-4xl">
-              Building practical software for real needs.
-            </h2>
-          </div>
-
-          <div className="space-y-5 text-lg leading-8 text-secondary">
-            <p>
-              I’m a software developer and teacher focused on building useful,
-              practical digital products.
-            </p>
-
-            <p>
-              My work ranges from frontend applications to backend systems,
-              databases, and tools designed around real-world workflows.
-            </p>
-
-            <p>
-              I enjoy understanding a problem deeply, designing a clear
-              solution, and improving it through real usage rather than simply
-              building features for their own sake.
-            </p>
-          </div>
+    <section id="about" className="border-y border-border bg-surface px-5 py-14 sm:px-6 sm:py-20">
+      <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm">
+            {text.about}
+          </p>
+          <h2 className="mt-3 max-w-[22ch] text-balance text-3xl leading-tight font-bold tracking-tight sm:text-4xl">
+            {text.aboutTitle}
+          </h2>
         </div>
+        <div className="grid max-w-[64ch] gap-4 self-center text-base leading-relaxed text-secondary sm:text-lg">
+          {text.aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-9 max-w-6xl border-t border-border pt-7 sm:mt-12 sm:pt-9">
+        <h3 id="skills" className="text-xl font-bold tracking-tight sm:text-2xl">{text.skillsTitle}</h3>
+        <ul className="mt-5 grid gap-5 sm:grid-cols-2">
+          {text.skills.map(({ label, title, description, tools }) => (
+            <li key={title} className="card-lift flex flex-col rounded-3xl border border-border bg-surface p-5 sm:p-7">
+              <p className="text-xs font-semibold uppercase tracking-wider text-accent">{label}</p>
+              <h4 className="mt-2 text-xl leading-tight font-bold tracking-tight">{title}</h4>
+              <p className="mt-3 max-w-[58ch] text-pretty text-sm leading-relaxed text-secondary sm:text-base">{description}</p>
+              <div className="mt-auto pt-5">
+                <TechnologyTags items={tools} />
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
