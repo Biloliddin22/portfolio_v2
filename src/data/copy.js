@@ -179,7 +179,7 @@ export const copy = {
     aboutTitle: 'Kundalik ishga mos dasturlar',
     aboutParagraphs: [
       'Men dasturchi va o‘qituvchiman. Amaliy vazifalar uchun veb-ilovalar, server tizimlari va ma’lumotlar bazalarini yarataman.',
-      'Avval odamlar vazifani hozir qanday bajarishini o‘rganaman. Keyin dasturdan foydalanish tajribasiga qarab uni takomillashtiraman.',
+      'Avval odamlar vazifani real hayotda qanday bajarishini o‘rganaman. Keyin esa jarayonlarni dasturga joylayman va sekin asta takomillashtiraman.',
     ],
     projectsTitle: 'Tanlangan ishlar',
     skillsTitle: 'Amaliy ko‘nikmalar',
@@ -191,9 +191,9 @@ export const copy = {
         tools: ['HTML / CSS', 'JavaScript', 'React', 'TypeScript'],
       },
       {
-        label: 'Biznes mantiqi',
+        label: 'Biznes logikasi',
         title: 'Backend va ma’lumotlar',
-        description: 'REST API va relyatsion ma’lumotlar bilan ishlayman. Joseph School tizimida davomat, to‘lovlar va balans qoidalarini bog‘lashga hissa qo‘shdim.',
+        description: 'REST API va relyatsion ma’lumotlar bilan ishlayman. Joseph School tizimida davomatni hisobga olish, to’lovlar va qoldiqlarni hisobga olish jarayonini bog’lashga yordam berdim.',
         tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy'],
       },
       {
