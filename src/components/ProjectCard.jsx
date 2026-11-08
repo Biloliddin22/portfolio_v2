@@ -4,7 +4,7 @@ import TasbehPreview from './TasbehPreview'
 import TechnologyTags from './TechnologyTags'
 
 function ProjectCard({ project, text, language }) {
-  const { title, description, highlights } = project.text[language]
+  const { title, description, highlights, linkLabel } = project.text[language]
   const preview = project.id === 'ielts-reading'
     ? <ReadingPreview text={text.readingPreview} />
     : <TasbehPreview text={text.tasbehPreview} />
@@ -54,7 +54,7 @@ function ProjectCard({ project, text, language }) {
             rel="noreferrer"
             className="nav-lift mt-6 inline-flex items-center gap-2 rounded-xl border border-border px-3.5 py-2.5 text-sm font-semibold"
           >
-            {project.id === 'ielts-reading' ? text.openPlatform : text.demo}
+            {linkLabel ?? (project.featured ? text.demo : text.openPlatform)}
             <span aria-hidden="true">↗</span>
           </a>
         )}

@@ -35,10 +35,11 @@ export const projects = [
   {
     id: 'tasbeh',
     technologies: ['HTML', 'CSS', 'JavaScript', 'PWA'],
+    demo: 'https://tasbeh.tbiloliddin.uz/',
     text: {
-      en: { title: 'Tasbeh', description: 'A digital tasbeh counter, with web and Android versions planned.' },
-      ru: { title: 'Тасбих', description: 'Цифровой счётчик для тасбиха. В планах версии для браузера и Android.' },
-      uz: { title: 'Tasbeh', description: 'Raqamli tasbeh hisoblagichi. Veb va Android versiyalari rejalashtirilgan.' },
+      en: { title: 'Tasbeh', description: 'A digital tasbeh with a freestyle counter and a daily list of five zikrs. The app saves progress on the device and offers light and dark themes.', linkLabel: 'Open Tasbeh' },
+      ru: { title: 'Тасбих', description: 'Цифровой тасбих со свободным счётом и списком из пяти зикров на день. Приложение сохраняет прогресс на устройстве и поддерживает светлую и тёмную темы.', linkLabel: 'Открыть Тасбих' },
+      uz: { title: 'Tasbeh', description: 'Erkin hisoblash rejimi va har kuni beshta zikr ro‘yxatiga ega raqamli tasbeh. Ilova natijalarni qurilmada saqlaydi, yorug‘ va qorong‘i mavzularni qo‘llaydi.', linkLabel: 'Tasbehni ochish' },
     },
   },
 ]
