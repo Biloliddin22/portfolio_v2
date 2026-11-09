@@ -8,20 +8,28 @@ import { copy, languages } from './data/copy'
 
 const languageKey = 'portfolio.language'
 
-function App() {
+function App({ ProjectPage }) {
   const [language, setLanguage] = useState(() => {
     const saved = localStorage.getItem(languageKey)
     return languages.some(({ code }) => code === saved) ? saved : 'en'
   })
   const text = copy[language]
+  const title = ProjectPage ? `BilKin | ${text.name}` : text.title
+  const homePath = ProjectPage ? '/' : ''
 
   useEffect(() => {
     document.documentElement.lang = language
-    document.title = text.title
+    document.title = title
     localStorage.setItem(languageKey, language)
-  }, [language, text.title])
+  }, [language, title])
 
   useLayoutEffect(() => {
+    if (ProjectPage) return
+
+    // Direct links from project pages can arrive before React mounts the anchor.
+    const anchor = document.getElementById(window.location.hash.slice(1))
+    anchor?.scrollIntoView({ behavior: 'instant' })
+
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return
     }
@@ -42,17 +50,19 @@ function App() {
       observer.disconnect()
       delete root.dataset.revealReady
     }
-  }, [])
+  }, [ProjectPage])
 
   return (
     <>
-      <Header text={text} language={language} setLanguage={setLanguage} />
-      <main>
-        <Hero text={text} />
-        <About text={text} />
-        <Projects text={text} language={language} />
-      </main>
-      <Footer text={text} />
+      <Header text={text} language={language} setLanguage={setLanguage} homePath={homePath} />
+      {ProjectPage ? <ProjectPage language={language} /> : (
+        <main>
+          <Hero text={text} />
+          <About text={text} />
+          <Projects text={text} language={language} />
+        </main>
+      )}
+      <Footer text={text} homePath={homePath} />
     </>
   )
 }

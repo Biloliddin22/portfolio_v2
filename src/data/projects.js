@@ -23,6 +23,35 @@ export const projects = [
     },
   },
   {
+    id: 'bilkin',
+    featured: true,
+    path: '/bilkin/',
+    technologies: ['C#', 'WPF', '.NET Framework', 'SQLite'],
+    text: {
+      en: {
+        title: 'BilKin',
+        description: 'My first Windows application. It helps families build a family tree and keep photos, relationships, and family history together on their computer.',
+        highlights: ['Family trees and photos', 'Relationship search', 'PNG and PDF export', 'ZIP transfer and backups'],
+        linkLabel: 'Watch and download',
+        previewCaption: 'Example family tree created in BilKin',
+      },
+      ru: {
+        title: 'BilKin',
+        description: 'Моя первая программа для Windows. В ней можно собрать семейное дерево и хранить фотографии, родственные связи и историю семьи на своём компьютере.',
+        highlights: ['Семейные деревья и фотографии', 'Поиск родственных связей', 'Экспорт в PNG и PDF', 'Перенос в ZIP и резервные копии'],
+        linkLabel: 'Посмотреть и скачать',
+        previewCaption: 'Пример семейного дерева, созданного в BilKin',
+      },
+      uz: {
+        title: 'BilKin',
+        description: 'Windows uchun yaratgan birinchi dasturim. Unda shajara tuzish, suratlar, qarindoshlik aloqalari va oila tarixini o‘z kompyuteringizda saqlash mumkin.',
+        highlights: ['Shajara va suratlar', 'Qarindoshlik aloqalarini qidirish', 'PNG va PDF formatlariga eksport', 'ZIP orqali ko‘chirish va zaxira nusxalari'],
+        linkLabel: 'Ko‘rish va yuklab olish',
+        previewCaption: 'BilKin’da yaratilgan shajara namunasi',
+      },
+    },
+  },
+  {
     id: 'ielts-reading',
     technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
     demo: 'https://ieltsreadingbt.netlify.app/',

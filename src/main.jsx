@@ -9,8 +9,18 @@ styles.id = 'portfolio-styles'
 styles.textContent = globalStyles
 document.head.append(styles)
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = document.getElementById('root')
+
+function renderPortfolio(ProjectPage) {
+  createRoot(root).render(
+    <StrictMode>
+      <App ProjectPage={ProjectPage} />
+    </StrictMode>,
+  )
+}
+
+if (root.dataset.page === 'bilkin') {
+  import('./components/BilKinPage.jsx').then(({ default: BilKinPage }) => renderPortfolio(BilKinPage))
+} else {
+  renderPortfolio()
+}

@@ -1,3 +1,4 @@
+import FamilyTreeViewer from './FamilyTreeViewer'
 import SchoolSystemPreview from './SchoolSystemPreview'
 import ReadingPreview from './ReadingPreview'
 import TasbehPreview from './TasbehPreview'
@@ -5,25 +6,29 @@ import TechnologyTags from './TechnologyTags'
 
 function ProjectCard({ project, text, language }) {
   const { title, description, highlights, linkLabel } = project.text[language]
-  const preview = project.id === 'ielts-reading'
-    ? <ReadingPreview text={text.readingPreview} />
-    : <TasbehPreview text={text.tasbehPreview} />
+  const { path, demo } = project
+  const previews = {
+    'school-system': <SchoolSystemPreview text={text.preview} language={language} />,
+    bilkin: (
+      <figure className="mx-auto w-full max-w-lg">
+        <FamilyTreeViewer language={language} caption={project.text[language].previewCaption} className="shadow-sm" />
+        <figcaption className="mt-3 text-xs leading-snug text-secondary">
+          {project.text[language].previewCaption}
+        </figcaption>
+      </figure>
+    ),
+    'ielts-reading': <ReadingPreview text={text.readingPreview} />,
+    tasbeh: <TasbehPreview text={text.tasbehPreview} />,
+  }
 
   return (
     <article
       data-reveal="zoom"
       className={`card-lift grid overflow-hidden rounded-3xl border border-border bg-surface ${project.featured ? 'lg:grid-cols-[1.25fr_1fr]' : 'md:row-span-2 md:grid-rows-subgrid'}`}
     >
-      {project.featured && (
-        <div className="flex min-w-0 items-center border-b border-border bg-accent-light/65 p-3 sm:p-5 lg:border-r lg:border-b-0">
-          <SchoolSystemPreview text={text.preview} language={language} />
-        </div>
-      )}
-      {!project.featured && (
-        <div className="border-b border-border bg-accent-light/65 p-3 sm:p-5">
-          {preview}
-        </div>
-      )}
+      <div className={`min-w-0 border-b border-border bg-accent-light/65 p-3 sm:p-5 ${project.featured ? 'flex items-center lg:border-r lg:border-b-0' : ''}`}>
+        {previews[project.id]}
+      </div>
 
       <div className="flex min-w-0 flex-col items-start p-5 sm:p-7">
         <p className="text-xs font-semibold uppercase tracking-wider text-accent">
@@ -47,15 +52,15 @@ function ProjectCard({ project, text, language }) {
           <TechnologyTags items={project.technologies} />
         </div>
 
-        {project.demo && (
+        {(path || demo) && (
           <a
-            href={project.demo}
-            target="_blank"
-            rel="noreferrer"
+            href={path ?? demo}
+            target={demo ? '_blank' : undefined}
+            rel={demo ? 'noreferrer' : undefined}
             className="nav-lift mt-6 inline-flex items-center gap-2 rounded-xl border border-border px-3.5 py-2.5 text-sm font-semibold"
           >
             {linkLabel ?? (project.featured ? text.demo : text.openPlatform)}
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">{path ? '→' : '↗'}</span>
           </a>
         )}
       </div>

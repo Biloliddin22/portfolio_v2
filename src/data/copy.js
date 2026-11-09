@@ -18,8 +18,8 @@ export const copy = {
     viewProjects: 'View projects',
     aboutTitle: 'Software built around how people work',
     aboutParagraphs: [
-      'I’m a software developer and teacher. I build web applications, backend systems, and databases for practical tasks.',
-      'I start by understanding how people do the work today, then refine the software based on how they use it.',
+      'I’m a software developer and teacher. I started programming in 2019. I build web applications, backend systems, and databases for practical tasks.',
+      'I first learn how people carry out the task in practice. Then I build those workflows into the software and refine it based on how people use it.',
     ],
     projectsTitle: 'Selected work',
     skillsTitle: 'Practical skills',
@@ -27,14 +27,14 @@ export const copy = {
       {
         label: 'Interface',
         title: 'Frontend',
-        description: 'I build responsive screens, forms, and tables. My projects include a school dashboard and a timed reading test with saved progress.',
+        description: 'I build responsive screens, forms, and tables. My projects include a school dashboard and a timed reading test with saved progress. BilKin was my first project with C# and WPF.',
         tools: ['HTML / CSS', 'JavaScript', 'React', 'TypeScript'],
       },
       {
         label: 'Business logic',
         title: 'Backend and data',
-        description: 'I work with REST APIs and relational data. For Joseph School, I helped turn rules for attendance, payments, and balances into connected workflows.',
-        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy'],
+        description: 'I work with REST APIs and relational data. For Joseph School, I helped turn rules for attendance, payments, and balances into connected workflows. I’ve also worked with PHP.',
+        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'PHP'],
       },
       {
         label: 'Quality and releases',
@@ -98,8 +98,8 @@ export const copy = {
     viewProjects: 'Посмотреть проекты',
     aboutTitle: 'Программы, которые помогают в работе',
     aboutParagraphs: [
-      'Я разработчик и преподаватель. Создаю веб-приложения, серверные системы и базы данных для практических задач.',
-      'Сначала разбираюсь, как люди выполняют задачу сейчас, а затем дорабатываю решение по результатам использования.',
+      'Я разработчик и преподаватель. Начал программировать в 2019 году. Создаю веб-приложения, серверные системы и базы данных для практических задач.',
+      'Сначала разбираюсь, как люди выполняют задачу в реальной жизни. Затем добавляю эти процессы в программу и дорабатываю решение по результатам использования.',
     ],
     projectsTitle: 'Избранные работы',
     skillsTitle: 'Практические навыки',
@@ -107,14 +107,14 @@ export const copy = {
       {
         label: 'Интерфейсы',
         title: 'Фронтенд',
-        description: 'Создаю адаптивные экраны, формы и таблицы. Среди моих проектов панель учебного центра и тест по чтению с таймером и сохранением прогресса.',
+        description: 'Создаю адаптивные экраны, формы и таблицы. Среди моих проектов панель учебного центра и тест по чтению с таймером и сохранением прогресса. BilKin стал моим первым проектом на C# и WPF.',
         tools: ['HTML / CSS', 'JavaScript', 'React', 'TypeScript'],
       },
       {
         label: 'Бизнес-логика',
         title: 'Бэкенд и данные',
-        description: 'Работаю с REST API и реляционными данными. В системе Joseph School помог связать правила учёта посещаемости, платежей и остатков.',
-        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy'],
+        description: 'Работаю с REST API и реляционными данными. В системе Joseph School помог связать правила учёта посещаемости, платежей и остатков. Раньше работал с PHP.',
+        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'PHP'],
       },
       {
         label: 'Качество и выпуск',
@@ -178,7 +178,7 @@ export const copy = {
     viewProjects: 'Loyihalarni ko‘rish',
     aboutTitle: 'Kundalik ishga mos dasturlar',
     aboutParagraphs: [
-      'Men dasturchi va o‘qituvchiman. Amaliy vazifalar uchun veb-ilovalar, server tizimlari va ma’lumotlar bazalarini yarataman.',
+      'Men dasturchi va o‘qituvchiman. Dasturlashni 2019-yilda boshlaganman. Amaliy vazifalar uchun veb-ilovalar, server tizimlari va ma’lumotlar bazalarini yarataman.',
       'Avval odamlar vazifani real hayotda qanday bajarishini o‘rganaman. Keyin esa jarayonlarni dasturga joylayman va sekin asta takomillashtiraman.',
     ],
     projectsTitle: 'Tanlangan ishlar',
@@ -187,14 +187,14 @@ export const copy = {
       {
         label: 'Interfeyslar',
         title: 'Frontend',
-        description: 'Turli ekranlarga mos sahifalar, shakllar va jadvallar yarataman. Loyihalarim orasida o‘quv markazi paneli hamda taymerli, test jarayonini saqlaydigan o‘qish ilovasi bor.',
+        description: 'Turli ekranlarga mos sahifalar, shakllar va jadvallar yarataman. Loyihalarim orasida o‘quv markazi paneli hamda taymerli, test jarayonini saqlaydigan o‘qish ilovasi bor. BilKin C# va WPF bilan ishlagan birinchi loyiham.',
         tools: ['HTML / CSS', 'JavaScript', 'React', 'TypeScript'],
       },
       {
         label: 'Biznes logikasi',
         title: 'Backend va ma’lumotlar',
-        description: 'REST API va relyatsion ma’lumotlar bilan ishlayman. Joseph School tizimida davomatni hisobga olish, to’lovlar va qoldiqlarni hisobga olish jarayonini bog’lashga yordam berdim.',
-        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy'],
+        description: 'REST API va relyatsion ma’lumotlar bilan ishlayman. Joseph School tizimida davomatni hisobga olish, to’lovlar va qoldiqlarni hisobga olish jarayonini bog’lashga yordam berdim. Avval PHP bilan ham ishlaganman.',
+        tools: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'PHP'],
       },
       {
         label: 'Sifat va nashr',

@@ -28,6 +28,10 @@ body {
   color: var(--color-primary);
 }
 
+html:has(.family-tree-dialog[open]) {
+  overflow: hidden;
+}
+
 .hero-screen {
   display: grid;
   align-items: center;

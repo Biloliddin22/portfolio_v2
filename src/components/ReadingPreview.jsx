@@ -2,15 +2,15 @@ const questions = [1, 2, 3, 4, 5]
 
 function ReadingPreview({ text }) {
   return (
-    <figure>
-      <div className="overflow-hidden rounded-xl border border-[#e3e5f0] bg-white text-[0.6875rem] leading-snug text-[#251b58] shadow-sm">
+    <figure className="flex h-full flex-col">
+      <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-[#e3e5f0] bg-white text-[0.6875rem] leading-snug text-[#251b58] shadow-sm">
         <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 border-b border-[#e3e5f0] px-2.5 py-2 sm:px-3">
           <span className="font-semibold">{text.title}</span>
           <span className="font-bold tabular-nums">42:18</span>
           <span className="justify-self-end rounded-md bg-[#251b58] px-1.5 py-1 font-medium text-white">{text.submit}</span>
         </div>
 
-        <div className="grid grid-cols-2 divide-x divide-[#e3e5f0]">
+        <div className="grid flex-1 grid-cols-2 divide-x divide-[#e3e5f0]">
           <div className="min-w-0 p-2.5 sm:p-3">
             <p className="text-[#6b6b8a]">{text.passage}</p>
             <p className="mt-1 font-bold">{text.passageTitle}</p>

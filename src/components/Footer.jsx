@@ -2,7 +2,7 @@ import { githubUrl, telegramUrl } from '../data/links'
 
 const footerLinkClass = 'rounded-sm text-sm text-secondary transition hover:text-accent'
 
-function Footer({ text }) {
+function Footer({ text, homePath = '' }) {
   const { prefix, love, by } = text.signature
   const year = new Date().getFullYear()
   const navigation = [
@@ -16,7 +16,7 @@ function Footer({ text }) {
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-2 gap-x-4 gap-y-5 py-6 sm:grid-cols-[1.4fr_0.8fr_1fr] sm:gap-8 sm:py-12">
           <div className="col-span-2 border-b border-border pb-4 sm:col-span-1 sm:border-b-0 sm:pb-0">
-            <a href="#home" className="rounded-sm text-lg font-bold tracking-tight transition hover:text-accent">
+            <a href={`${homePath}#home`} className="rounded-sm text-lg font-bold tracking-tight transition hover:text-accent">
               {text.name}
             </a>
             <p className="mt-2 text-sm leading-relaxed text-secondary">{text.role}</p>
@@ -25,7 +25,7 @@ function Footer({ text }) {
             <h2 className="text-sm font-semibold">{text.footer.navigation}</h2>
             <ul className="mt-3 grid gap-2">
               {navigation.map(([href, label]) => (
-                <li key={href}><a href={href} className={footerLinkClass}>{label}</a></li>
+                <li key={href}><a href={`${homePath}${href}`} className={footerLinkClass}>{label}</a></li>
               ))}
             </ul>
           </nav>

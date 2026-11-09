@@ -36,7 +36,7 @@ function TasbehPreview({ text }) {
           <svg className="absolute top-2 right-2 size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 4v6h-6M19.2 10a8 8 0 1 0 .3 4" />
           </svg>
-          <span className="text-4xl leading-none font-semibold">18</span>
+          <span className="text-4xl leading-none font-semibold">22</span>
           <span className="flex items-center gap-2 text-xs">
             / 33 <span className="h-3 w-px bg-white/50" /> × 1
           </span>
