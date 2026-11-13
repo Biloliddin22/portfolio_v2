@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import Header from './components/Header'
-import OfflineNotice from './components/OfflineNotice'
+import Notifications from './components/Notifications'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
@@ -90,7 +90,7 @@ function App({ ProjectPage }) {
         </main>
       )}
       <Footer text={text} homePath={homePath} />
-      <OfflineNotice language={language} />
+      <Notifications language={language} />
     </>
   )
 }

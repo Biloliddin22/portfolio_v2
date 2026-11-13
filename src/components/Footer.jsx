@@ -12,7 +12,7 @@ function Footer({ text, homePath = '' }) {
   ]
 
   return (
-    <footer className="border-t border-border bg-surface px-5 sm:px-6">
+    <footer className="site-footer border-t border-border bg-surface px-5 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-2 gap-x-4 gap-y-5 py-6 sm:grid-cols-[1.4fr_0.8fr_1fr] sm:gap-8 sm:py-12">
           <div data-reveal="" className="col-span-2 border-b border-border pb-4 sm:col-span-1 sm:border-b-0 sm:pb-0">

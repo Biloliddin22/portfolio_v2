@@ -19,6 +19,8 @@ function FamilyTreeViewer({ language, caption, className }) {
   const image = useRef(null)
   const zoomAnchor = useRef(null)
   const drag = useRef(null)
+  const pointers = useRef(new Map())
+  const pinch = useRef(null)
   const [zoom, setZoom] = useState(100)
 
   useLayoutEffect(() => {
@@ -84,23 +86,49 @@ function FamilyTreeViewer({ language, caption, className }) {
   function closeViewer() {
     zoomAnchor.current = null
     drag.current = null
+    pointers.current.clear()
+    pinch.current = null
     setZoom(100)
     trigger.current.focus({ preventScroll: true })
   }
 
   function startDrag(event) {
-    if (zoom === 100 || event.pointerType !== 'mouse' || event.button !== 0) return
-
+    if (event.pointerType === 'mouse' && event.button !== 0) return
     const view = event.currentTarget
-    drag.current = { x: event.clientX + view.scrollLeft, y: event.clientY + view.scrollTop }
+    pointers.current.set(event.pointerId, { clientX: event.clientX, clientY: event.clientY })
     view.setPointerCapture(event.pointerId)
+    drag.current = { x: event.clientX + view.scrollLeft, y: event.clientY + view.scrollTop }
+    if (pointers.current.size === 2) {
+      const [a, b] = [...pointers.current.values()]
+      pinch.current = { distance: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), zoom }
+    }
   }
 
   function moveDrag(event) {
-    if (!drag.current) return
+    if (!pointers.current.has(event.pointerId)) return
+    pointers.current.set(event.pointerId, { clientX: event.clientX, clientY: event.clientY })
+    if (pointers.current.size === 2 && pinch.current) {
+      const [a, b] = [...pointers.current.values()]
+      const distance = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
+      if (pinch.current.distance > 0) {
+        changeZoom(Math.round(pinch.current.zoom * distance / pinch.current.distance), {
+          clientX: (a.clientX + b.clientX) / 2, clientY: (a.clientY + b.clientY) / 2,
+        })
+      }
+    } else if (pointers.current.size === 1 && drag.current && zoom > 100) {
+      event.currentTarget.scrollLeft = drag.current.x - event.clientX
+      event.currentTarget.scrollTop = drag.current.y - event.clientY
+    }
+  }
 
-    event.currentTarget.scrollLeft = drag.current.x - event.clientX
-    event.currentTarget.scrollTop = drag.current.y - event.clientY
+  function stopDrag(event) {
+    pointers.current.delete(event.pointerId)
+    pinch.current = null
+    const remaining = [...pointers.current.values()][0]
+    drag.current = remaining ? {
+      x: remaining.clientX + event.currentTarget.scrollLeft,
+      y: remaining.clientY + event.currentTarget.scrollTop,
+    } : null
   }
 
   return (
@@ -132,7 +160,7 @@ function FamilyTreeViewer({ language, caption, className }) {
         }}
         className="family-tree-dialog fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none flex-col overflow-hidden bg-surface text-primary open:flex"
       >
-        <div className="tree-toolbar flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border p-2 sm:px-4">
+        <div className="tree-toolbar sticky top-0 z-10 flex shrink-0 bg-surface flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border p-2 sm:px-4">
           <h2 id={titleId} className="pl-1 font-semibold">{text.title}</h2>
           <div className="flex flex-wrap items-center gap-1.5">
             <button type="button" className={control} aria-label={text.out} title={text.out} disabled={zoom === 100} onClick={() => changeZoom(zoom - 50)}>−</button>
@@ -156,10 +184,12 @@ function FamilyTreeViewer({ language, caption, className }) {
           role="region"
           tabIndex={0}
           aria-label={caption}
-          className={`min-h-0 flex-1 overflow-auto overscroll-contain bg-background [container-type:size] ${zoom > 100 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+          className={`min-h-0 flex-1 touch-none overflow-auto overscroll-contain bg-background [container-type:size] ${zoom > 100 ? 'cursor-grab active:cursor-grabbing' : ''}`}
           onPointerDown={startDrag}
           onPointerMove={moveDrag}
-          onLostPointerCapture={() => { drag.current = null }}
+          onPointerUp={stopDrag}
+          onPointerCancel={stopDrag}
+          onLostPointerCapture={stopDrag}
         >
           <div className="grid min-h-full min-w-full w-max place-items-center">
             <img

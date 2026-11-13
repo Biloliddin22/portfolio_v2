@@ -1,3 +1,4 @@
+import DownloadLink from './DownloadLink'
 import VideoPlayer from './VideoPlayer'
 import FamilyTreeViewer, { familyTreeImage } from './FamilyTreeViewer'
 import TechnologyTags from './TechnologyTags'
@@ -100,10 +101,10 @@ function BilKinPage({ language }) {
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-secondary">{text.releaseNotes[index]}</p>
                 </div>
-                <a href={file} download className={actionClass} aria-label={`${text.download} BilKin ${version}`}>
+                <DownloadLink href={file} className={actionClass} aria-label={`${text.download} BilKin ${version}`}>
                   <DownloadIcon />
                   {text.download}
-                </a>
+                </DownloadLink>
               </li>
             )
           })}
@@ -113,12 +114,12 @@ function BilKinPage({ language }) {
         <h2 id="bilkin-examples-title" className="text-xl font-bold tracking-tight">{text.examples}</h2>
         <p className="mt-2 text-sm leading-relaxed text-secondary">{text.exampleDescription}</p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <a href={`${mediaPath}/family-tree-example.pdf`} download className={actionClass}>
+          <DownloadLink href={`${mediaPath}/family-tree-example.pdf`} className={actionClass}>
             <DownloadIcon /> {text.download} PDF
-          </a>
-          <a href={familyTreeImage} download className={actionClass}>
+          </DownloadLink>
+          <DownloadLink href={familyTreeImage} className={actionClass}>
             <DownloadIcon /> {text.download} PNG
-          </a>
+          </DownloadLink>
         </div>
         <FamilyTreeViewer language={language} caption={project.text[language].previewCaption} className="mt-5" />
       </section>
