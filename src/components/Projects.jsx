@@ -9,8 +9,10 @@ function Projects({ text, language }) {
     <section aria-labelledby="projects-heading" className="px-5 py-14 sm:px-6 sm:py-20 mb-14">
       <div className="mx-auto max-w-6xl">
         <div id="projects" className="mb-8 max-w-[66ch] sm:mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm">{text.projects}</p>
-          <h2 id="projects-heading" data-reveal="" className="mt-3 text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{text.projectsTitle}</h2>
+          <div data-reveal="">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm">{text.projects}</p>
+            <h2 id="projects-heading" className="mt-3 text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{text.projectsTitle}</h2>
+          </div>
         </div>
 
         <div className="grid gap-5">

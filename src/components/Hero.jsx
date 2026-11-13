@@ -24,7 +24,7 @@ function Hero({ text }) {
           {text.intro}
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <a href="#projects" className="rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+          <a href="#projects" className="nav-lift nav-primary rounded-xl border border-transparent px-5 py-3 text-sm font-semibold">
             {text.viewProjects}
           </a>
           <a

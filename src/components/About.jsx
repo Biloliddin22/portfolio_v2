@@ -18,7 +18,7 @@ function About({ text }) {
       </div>
 
       <div className="mx-auto mt-9 max-w-6xl border-t border-border pt-7 sm:mt-12 sm:pt-9">
-        <h3 id="skills" className="text-xl font-bold tracking-tight sm:text-2xl">{text.skillsTitle}</h3>
+        <h3 id="skills" className="text-xl font-bold tracking-tight sm:text-2xl"><span data-reveal="" className="inline-block">{text.skillsTitle}</span></h3>
         <ul className="mt-5 grid gap-5 sm:grid-cols-2">
           {text.skills.map(({ label, title, description, tools }, index) => (
             <li key={tools[0]} data-reveal={index % 2 === 0 ? 'left' : 'right'} className="card-lift flex flex-col rounded-3xl border border-border bg-surface p-5 sm:p-7">

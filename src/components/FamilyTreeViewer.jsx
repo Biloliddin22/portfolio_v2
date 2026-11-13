@@ -8,7 +8,7 @@ const copy = {
   uz: { open: 'Shajarani kattalashtirish', title: 'Shajara', out: 'Kichraytirish', in: 'Kattalashtirish', fit: 'Sig‘dirish', close: 'Yopish' },
 }
 
-const control = 'grid size-11 shrink-0 cursor-pointer place-items-center rounded-full border border-border bg-surface text-primary disabled:cursor-default disabled:opacity-40 enabled:hover:bg-accent-light'
+const control = 'press-feedback grid size-11 shrink-0 cursor-pointer place-items-center rounded-full border border-border bg-surface text-primary disabled:cursor-default disabled:opacity-40 enabled:hover:bg-accent-light'
 
 function FamilyTreeViewer({ language, caption, className }) {
   const text = copy[language]
@@ -64,8 +64,21 @@ function FamilyTreeViewer({ language, caption, className }) {
   }, [])
 
   function openViewer() {
+    delete dialog.current.dataset.closing
     dialog.current.showModal()
     viewport.current.scrollTo(0, 0)
+  }
+
+  async function requestClose() {
+    const element = dialog.current
+    if (!element.open || element.hasAttribute('data-closing')) return
+
+    element.dataset.closing = ''
+    // Keep the modal in the top layer until its fade finishes, including on Safari.
+    await Promise.allSettled(element.getAnimations().map((animation) => animation.finished))
+    if (!element.isConnected || !element.hasAttribute('data-closing')) return
+    element.close()
+    delete element.dataset.closing
   }
 
   function closeViewer() {
@@ -98,7 +111,7 @@ function FamilyTreeViewer({ language, caption, className }) {
         aria-label={text.open}
         aria-haspopup="dialog"
         onClick={openViewer}
-        className={`relative block w-full cursor-zoom-in overflow-hidden rounded-xl border border-border ${className}`}
+        className={`press-feedback relative block w-full cursor-zoom-in overflow-hidden rounded-xl border border-border ${className}`}
       >
         <img src={familyTreeImage} alt="" width={2736} height={2320} loading="lazy" decoding="async" className="block h-auto w-full" />
         <span aria-hidden="true" className="absolute top-2 right-2 grid size-9 place-items-center rounded-full border border-border bg-surface text-accent shadow-sm">
@@ -113,9 +126,13 @@ function FamilyTreeViewer({ language, caption, className }) {
         ref={dialog}
         aria-labelledby={titleId}
         onClose={closeViewer}
+        onCancel={(event) => {
+          event.preventDefault()
+          requestClose()
+        }}
         className="family-tree-dialog fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none flex-col overflow-hidden bg-surface text-primary open:flex"
       >
-        <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border p-2 sm:px-4">
+        <div className="tree-toolbar flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border p-2 sm:px-4">
           <h2 id={titleId} className="pl-1 font-semibold">{text.title}</h2>
           <div className="flex flex-wrap items-center gap-1.5">
             <button type="button" className={control} aria-label={text.out} title={text.out} disabled={zoom === 100} onClick={() => changeZoom(zoom - 50)}>−</button>
@@ -127,7 +144,7 @@ function FamilyTreeViewer({ language, caption, className }) {
                 <rect x="8" y="8" width="8" height="8" rx="1" />
               </svg>
             </button>
-            <button type="button" className={control} aria-label={text.close} title={text.close} onClick={() => dialog.current.close()}>
+            <button type="button" className={control} aria-label={text.close} title={text.close} onClick={requestClose}>
               <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <path d="m6 6 12 12M18 6 6 18" />
               </svg>

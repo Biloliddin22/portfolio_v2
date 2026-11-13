@@ -54,7 +54,8 @@ function Header({ text, language, setLanguage, homePath = '' }) {
         <div
           role="group"
           aria-label={text.language}
-          className="flex shrink-0 rounded-full border border-border bg-background p-0.5 sm:ml-2 sm:gap-1 sm:p-1"
+          style={{ '--language-index': languages.findIndex(({ code }) => code === language) }}
+          className="language-switch flex shrink-0 rounded-full border border-border bg-background p-0.5 sm:ml-2 sm:gap-1 sm:p-1"
         >
           {languages.map(({ code, label }) => (
             <button
@@ -64,7 +65,7 @@ function Header({ text, language, setLanguage, homePath = '' }) {
               aria-label={label}
               aria-pressed={language === code}
               onClick={() => setLanguage(code)}
-              className="nav-lift grid size-7 cursor-pointer place-items-center rounded-full text-xs font-semibold uppercase min-[360px]:size-8"
+              className="language-choice press-feedback grid size-7 cursor-pointer place-items-center rounded-full text-xs font-semibold uppercase min-[360px]:size-8"
             >
               {code}
             </button>

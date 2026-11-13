@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import VideoPlayer from './VideoPlayer'
 import FamilyTreeViewer, { familyTreeImage } from './FamilyTreeViewer'
 import TechnologyTags from './TechnologyTags'
 import { projects } from '../data/projects'
@@ -15,7 +15,6 @@ const copy = {
     exampleDescription: 'A family tree exported from BilKin in two formats.',
     video: 'Video presentation',
     videoLanguage: 'Russian',
-    play: 'Play video',
     versions: 'Windows downloads',
     requirements: 'Requires .NET Framework 4.8 or later. The installers are unsigned.',
     latest: 'Recommended',
@@ -28,7 +27,6 @@ const copy = {
     exampleDescription: 'Семейное дерево, экспортированное из BilKin в двух форматах.',
     video: 'Видеопрезентация',
     videoLanguage: 'На русском',
-    play: 'Смотреть видео',
     versions: 'Скачать для Windows',
     requirements: 'Требуется .NET Framework 4.8 или новее. Установщики без цифровой подписи.',
     latest: 'Рекомендуемая версия',
@@ -41,7 +39,6 @@ const copy = {
     exampleDescription: 'BilKin dasturidan ikki formatda eksport qilingan shajara.',
     video: 'Video taqdimot',
     videoLanguage: 'Rus tilida',
-    play: 'Videoni ko‘rish',
     versions: 'Windows uchun yuklab olish',
     requirements: '.NET Framework 4.8 yoki yangirog‘i talab qilinadi. O‘rnatish fayllari raqamli imzolanmagan.',
     latest: 'Tavsiya etilgan versiya',
@@ -60,22 +57,10 @@ function DownloadIcon() {
 
 function BilKinPage({ language }) {
   const text = copy[language]
-  const videoRef = useRef(null)
-  const [started, setStarted] = useState(false)
-
-  function startVideo() {
-    const video = videoRef.current
-    video.src = `${mediaPath}/presentation-ru.mp4`
-    setStarted(true)
-    video.focus()
-    video.play().catch(() => {
-      // Keep the native controls available if playback is interrupted.
-    })
-  }
 
   return (
-    <main className="mx-auto grid max-w-4xl gap-8 px-5 py-8 sm:gap-12 sm:px-6 sm:py-14">
-      <div>
+    <main data-repeat-reveals="" className="mx-auto grid max-w-4xl gap-8 px-5 py-8 sm:gap-12 sm:px-6 sm:py-14">
+      <div data-reveal="">
         <a href="/#projects" className={actionClass}>
           <svg aria-hidden="true" className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5m6-6-6 6 6 6" />
@@ -92,35 +77,15 @@ function BilKinPage({ language }) {
         </div>
       </div>
 
-      <section aria-labelledby="bilkin-video-title" className="rounded-3xl border border-border bg-surface p-4 sm:p-6">
+      <section data-reveal="" aria-labelledby="bilkin-video-title" className="rounded-3xl border border-border bg-surface p-4 sm:p-6">
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 id="bilkin-video-title" className="text-xl font-bold tracking-tight">{text.video}</h2>
           <span className="text-sm text-secondary">{text.videoLanguage}</span>
         </div>
-        <div className="relative isolate aspect-video overflow-hidden rounded-2xl bg-[#faf7f2]">
-          <video
-            ref={videoRef}
-            className="block size-full object-cover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent fullscreen:object-contain"
-            aria-labelledby="bilkin-video-title"
-            poster={`${mediaPath}/video-cover.png`}
-            preload="none"
-            controls={started}
-            playsInline
-            tabIndex={started ? 0 : -1}
-          />
-          {!started && (
-            <button
-              type="button"
-              onClick={startVideo}
-              className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 cursor-pointer items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-white shadow-sm sm:bottom-5"
-            >
-              <span aria-hidden="true">▶</span> {text.play}
-            </button>
-          )}
-        </div>
+        <VideoPlayer language={language} titleId="bilkin-video-title" />
       </section>
 
-      <section aria-labelledby="bilkin-versions-title">
+      <section data-reveal="" aria-labelledby="bilkin-versions-title">
         <h2 id="bilkin-versions-title" className="text-2xl font-bold tracking-tight">{text.versions}</h2>
         <p className="mt-2 text-sm leading-relaxed text-secondary">{text.requirements}</p>
         <ul className="mt-4 grid gap-3">
@@ -144,7 +109,7 @@ function BilKinPage({ language }) {
           })}
         </ul>
       </section>
-      <section aria-labelledby="bilkin-examples-title" className="rounded-3xl border border-border bg-surface p-4 sm:p-6">
+      <section data-reveal="" aria-labelledby="bilkin-examples-title" className="rounded-3xl border border-border bg-surface p-4 sm:p-6">
         <h2 id="bilkin-examples-title" className="text-xl font-bold tracking-tight">{text.examples}</h2>
         <p className="mt-2 text-sm leading-relaxed text-secondary">{text.exampleDescription}</p>
         <div className="mt-4 flex flex-wrap gap-2">
