@@ -34,6 +34,8 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url)
   if (url.origin !== self.location.origin) return
+  // Anchor links must resolve to the same cached HTML as the page itself.
+  url.hash = ''
   url.search = ''
   if (event.request.mode === 'navigate') {
     url.pathname = pageAliases.get(url.pathname) ?? url.pathname
